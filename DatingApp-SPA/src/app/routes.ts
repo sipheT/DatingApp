@@ -9,6 +9,7 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MembersEditComponent } from './members/members-edit/members-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './prevent-unsaved-changes.guard';
 
 export const AppRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -19,7 +20,9 @@ export const AppRoutes: Routes = [
         children: [
             { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver} },
             { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver} },
-            { path: 'member/edit', component: MembersEditComponent, resolve: {user: MemberEditResolver} },
+            // tslint:disable-next-line: max-line-length
+            { path: 'member/edit', component: MembersEditComponent, resolve: {user: MemberEditResolver},
+                                     canDeactivate: [PreventUnsavedChanges] },
             { path: 'messages', component: MessagesComponent },
             { path: 'lists', component: ListsComponent },
         ]

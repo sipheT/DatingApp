@@ -26,6 +26,8 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MembersEditComponent } from './members/members-edit/members-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChanges } from './prevent-unsaved-changes.guard';
  
 
 export function tokengetter(){
@@ -73,6 +75,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
    providers: [
       ErrorInterceptorProvider,
       AuthService,
+      AuthGuard,
+      PreventUnsavedChanges,
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
