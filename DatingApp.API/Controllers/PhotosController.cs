@@ -19,7 +19,6 @@ namespace DatingApp.API.Controllers
     [ApiController]
     public class PhotosController : ControllerBase
     {
-        private const char V = 'fill';
         private readonly IDatingRepository _repo;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
@@ -53,7 +52,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoforUser(int userId, PhotoForCreationDto photoForCreationDto){
+        public async Task<IActionResult> AddPhotoforUser(int userId, [FromForm]PhotoForCreationDto photoForCreationDto){
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
             var userFromRepo = await _repo.GetUser(userId);
@@ -86,7 +85,8 @@ namespace DatingApp.API.Controllers
 
             if(await _repo.SaveAll()){
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto", new {id = photo.Id, userId = userId}, photoToReturn);
+                
+                return CreatedAtRoute(new {userId = userId, id = photo.Id}, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");
