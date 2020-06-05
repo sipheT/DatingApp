@@ -61,7 +61,7 @@ export class PhotoEditorComponent implements OnInit {
   };
  }
 
- setMainPhoto(photo: Photo){
+ setMainPhoto(photo: Photo) {
   this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe( () => {
       this.currentMain = this.photos.filter(p => p.isMain === true)[0];
       this.currentMain.isMain = false;
@@ -72,5 +72,16 @@ export class PhotoEditorComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+ }
+
+ deletePhoto(id: number){
+  this.alertify.confirm('Are you sure you want to delete the photo?', () => {
+    this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
+      this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
+      this.alertify.success('Photo has been deleted')
+    }, error => {
+      this.alertify.error('Failed to delete photo')
+    });
+  });
  }
 }
