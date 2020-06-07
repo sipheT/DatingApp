@@ -12,10 +12,16 @@
     width: auto;
 }
 
+.card-image-top{
+    max-width: 158px;
+    max-height: 128px;
+}
+
 .card-image-wrapper{
     overflow: hidden;
     position: relative;
     max-height: 128px;
+    max-width: 158px;
 }
 
 .member-icons{
