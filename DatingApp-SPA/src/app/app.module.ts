@@ -31,6 +31,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 export function tokengetter(){
    return localStorage.getItem('token');
@@ -56,7 +57,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       MemberCardComponent,
       MemberDetailComponent,
       MembersEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      TimeAgoPipe
    ],
    imports: [
       BrowserModule,
