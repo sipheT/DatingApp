@@ -7,6 +7,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AppRoutes } from './routes';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -34,7 +35,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 
-export function tokengetter(){
+export function tokengetter() {
    return localStorage.getItem('token');
 }
 
@@ -72,6 +73,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       BsDatepickerModule.forRoot(),
       TabsModule.forRoot(),
       PaginationModule.forRoot(),
+      ButtonsModule.forRoot(),
       RouterModule.forRoot(AppRoutes),
       NgxGalleryModule,
       FileUploadModule,
